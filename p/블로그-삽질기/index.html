@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='블로그를 다시 시작하며 이전에 TIL(Today I Learned) 을 하는 것이 공부에 도움이 된다는 소리에 블로그를 시작했던 적이 있다. 하지만 초창기에 문법 배우는 와중에 TIL 이라고 따로 쓸것도 없었고, 매일 남들에게 보여주기 위한 공부를 한다는 생각이 들어서 블로그를 접었다.
+그 후에 Notion 을 사용해서 공부한 것을 정리하고 있었다. 막상 Notion 을 사용해서 정리하다보니깐 나먼 본다는 생각에 좀 적당적당히 찾아보고 대충 넘어가려는 생각이 들어서 다시 블로그에 대한 생각이 늘었다.
+그래서 블로그를 시작하려고 하면서 했던 삽질들에 대해서 적어보고자 한다.'><title>블로그 삽질기</title>
+
+<link rel='canonical' href='https://example.com/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.b80bf249ce4a22cf55e8d7340a0b37a2f2c10f54f3a9a49cb94b694a2eb0bbea.css"><meta property='og:title' content='블로그 삽질기'>
+<meta property='og:description' content='블로그를 다시 시작하며 이전에 TIL(Today I Learned) 을 하는 것이 공부에 도움이 된다는 소리에 블로그를 시작했던 적이 있다. 하지만 초창기에 문법 배우는 와중에 TIL 이라고 따로 쓸것도 없었고, 매일 남들에게 보여주기 위한 공부를 한다는 생각이 들어서 블로그를 접었다.
+그 후에 Notion 을 사용해서 공부한 것을 정리하고 있었다. 막상 Notion 을 사용해서 정리하다보니깐 나먼 본다는 생각에 좀 적당적당히 찾아보고 대충 넘어가려는 생각이 들어서 다시 블로그에 대한 생각이 늘었다.
+그래서 블로그를 시작하려고 하면서 했던 삽질들에 대해서 적어보고자 한다.'>
+<meta property='og:url' content='https://example.com/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/'>
+<meta property='og:site_name' content='limecats Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='blog' /><meta property='article:tag' content='hugo' /><meta property='article:published_time' content='2022-03-15T21:00:33&#43;09:00'/><meta property='article:modified_time' content='2022-03-15T21:00:33&#43;09:00'/>
+<meta name="twitter:title" content="블로그 삽질기">
+<meta name="twitter:description" content="블로그를 다시 시작하며 이전에 TIL(Today I Learned) 을 하는 것이 공부에 도움이 된다는 소리에 블로그를 시작했던 적이 있다. 하지만 초창기에 문법 배우는 와중에 TIL 이라고 따로 쓸것도 없었고, 매일 남들에게 보여주기 위한 공부를 한다는 생각이 들어서 블로그를 접었다.
+그 후에 Notion 을 사용해서 공부한 것을 정리하고 있었다. 막상 Notion 을 사용해서 정리하다보니깐 나먼 본다는 생각에 좀 적당적당히 찾아보고 대충 넘어가려는 생각이 들어서 다시 블로그에 대한 생각이 늘었다.
+그래서 블로그를 시작하려고 하면서 했던 삽질들에 대해서 적어보고자 한다.">
+    <link rel="shortcut icon" href="favicon_io/favicon-16x16.png" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">limecats Blog</a></h1>
+            <h2 class="site-description">열심히 개발 공부하는 블로그</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>다크 모드</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/blog/" >
+                blog
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/">블로그 삽질기</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 15, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 분 정도
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="블로그를-다시-시작하며">블로그를 다시 시작하며</h2>
+<p>이전에 <strong>TIL(Today I Learned)</strong> 을 하는 것이 공부에 도움이 된다는 소리에 블로그를 시작했던 적이 있다. 하지만 초창기에 문법 배우는 와중에 <strong>TIL</strong> 이라고 따로 쓸것도 없었고, 매일 남들에게 보여주기 위한 공부를 한다는 생각이 들어서 블로그를 접었다.</p>
+<p>그 후에 <strong>Notion</strong> 을 사용해서 공부한 것을 정리하고 있었다. 막상 <strong>Notion</strong> 을 사용해서 정리하다보니깐 나먼 본다는 생각에 좀 적당적당히 찾아보고 대충 넘어가려는 생각이 들어서 다시 블로그에 대한 생각이 늘었다.</p>
+<p>그래서 블로그를 시작하려고 하면서 했던 삽질들에 대해서 적어보고자 한다.</p>
+<h2 id="전까지-거쳤던-것들">전까지 거쳤던 것들</h2>
+<h3 id="티스토리">티스토리</h3>
+<p>기존에 <strong>TIL</strong> 할때 썼던 블로그다. 다 좋은데 기본 마크다운이 정말 거지같다. 그래서 이번에 css변경해서 마크다운 스타일을 바꿔서 써보려고 했다. <a class="link" href="https://starrykss.tistory.com/1140"  target="_blank" rel="noopener"
+    >링크</a>를 참고해서 변경해봤는데 뭔가.. 뭔가 아쉽게 내가 원하는 스타일이 나오지 않았다.</p>
+<p>굳이 더 삽질하고 뭘 더 하는 시간에 다른 플랫폼이나 벙법도 경험해보고 안되면 마지막에 다시 하자는 마인드로 패스!</p>
+<h3 id="velog">velog</h3>
+<p>개인적으로 생긴게 깔쌈하고 글쓰기도 좋고 나쁘지 않아보이긴 했는데 블로그라기 보다는 블로그 형식의 글을 모아둔 플랫폼? 이라는 느낌을 지울 수 없었다. 특정 키워드(<code>pwd</code>, <code>content</code>,<code>coinone</code> 등)가 들어가면 자동으로 검열되서 비공개로 전환된다거나 하는 점이 뭔가 아쉽게 느껴졌다. 또한 개발에 관련된 이야기만 올려야 될 것 같은 느낌이 싫었다.</p>
+<p>일단 <strong>gitpage</strong>로 만들어보고 너무 오래 걸리거나 복잡할 것 같으면 임시로 사용하고 나중에 틈틈히 만들어서 넘어갈 생각에 패스!</p>
+<h3 id="gitpage">gitpage</h3>
+<p>결국 뭔가 하니씩 맘에 드는게 없으니깐 만들어쓰자 라는 결론에 다다랐다.</p>
+<p>Jekyll, Hugo, Gatsby, Nuxt 등 <a class="link" href="https://jamstack.org/generators/"  target="_blank" rel="noopener"
+    >옵션</a>도 많았고 그만큼 삽질도 많았다. 우선 제일 중요하게 생각한 것은 <em>원하는 테마가 있는가?</em> 였다. 우선 디자인에는 자신이 없었고 블로그를 위해서 처음부터 만드는 건 주객전도라는 느낌에서 이미 만들어진 테마에서 조금씩 손보는 수준에서 해결되길 원했다.</p>
+<h4 id="nuxt">Nuxt</h4>
+<p>지금 공부하고 있는 <strong>Vue</strong> 기반으로 만들어져서 수정하기 편해보였으나 블로그 용으로 사용하는 사람은 없어서 그런지 테마가 없었고 그렇게 제외되었다.</p>
+<h4 id="jekyll">Jekyll</h4>
+<p>우선 깃허브 공동창업자가 만들기도 했고 오래되서 테마도 많고 강의도 많았다. 근데 더 인기있는 것들은 이유가 있지 않을까 싶어서 다른 것들을 시도해보고 나중에 해볼 생각으로 패스.</p>
+<h4 id="gatsby">Gatsby</h4>
+<p>제목이 블로그 삽질기지만 사실 <strong>Gatsby</strong> 삽질기라고 생각해도 좋을 것이다. 일단 기본으로 설치했을 때는 잘 작동하는 것처럼 보였다. 그래서 맘에 드는 테마를 하나 찾았다. 이름은 <a class="link" href="https://github.com/JaeYeopHan/gatsby-starter-bee"  target="_blank" rel="noopener"
+    >gatsby-starter-bee</a> 이다.</p>
+<p><code>Read.me</code>를 보고 설치할 때부터 갑자기 오류를 뱉기 시작한다. 그렇게 이슈를 뒤져보니깐 <em><strong>Node 16</strong></em> 이상 버전은 지원하지 않는다는 것을 봤다. 그래서 <code>nvm</code> 를 이용해서 <em><strong>Node 14</strong></em> 로 낮추니깐 설치하는데 문제가 발생하지 않았다.</p>
+<p>그리고 <code>npm start</code>를 해서 띄워보니깐 이미지와 관련된 것들이 죄다 오류를 뱉기 시작했다. 그렇게 블로그는 떳는데 이미지는 하나도 안뜨는 상황이 발생했다!</p>
+<p>그렇게 다시 구글링해본 결과 silicon mac에서 <code>gatsby-plugin-sharp</code>라는 플러그인을 사용하는데 생기는 문제였다. 그래서 <code>sharp</code>의 <a class="link" href="https://github.com/lovell/sharp/issues/2460"  target="_blank" rel="noopener"
+    >이슈</a>를 찾아서 해결하려고 했으나 결국 해결하지 못했다.</p>
+<p>그렇게 제일 맘에 드는 테마였는데 결국 <strong>Gatsby</strong>는 포기하게 되었다.</p>
+<h4 id="hugo">Hugo</h4>
+<p>휴고에 대한 자세한 이야기는 다른 블로그를 찾아봐도 잘 나와있으니깐 제외하고 테마 중에 제일 맘에 드는 테마를 선정해서 설치해보았다. 선정한 테마는 <a class="link" href="https://github.com/CaiJimmy/hugo-theme-stack"  target="_blank" rel="noopener"
+    >Hugo Theme Stack</a>이다.</p>
+<p>우선 설치하는데 딱히 지장이 없었지만 tablet 사이즈에서 오른쪽 위젯이 안 보이거나 하는 살짝 아쉬운 점이 있지만 이 정도는 구글링으로 해결 가능할 것으로 보이고 그 밖에 다른 큰 문제점은 보이지 않아서 결국 <strong>Hugo</strong> 에 정착하기로 했다.</p>
+<h2 id="마치며">마치며</h2>
+<p>아직 댓글 기능도 넣지 않았고 검색에 노출되도록 설정도 안했고 <code>google analytic</code>도 설정 안 해놨지만 우선 글을 쓰고 생각을 정리하여 기록해둔다는 큰 목적은 만족했으니깐 첫 글을 작성하게 되었다. 이번 블로그는 남에게 보여주기 위한 무언가가 아니라 나를 위한 공간으로 잘 꾸며가고 싶다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/blog/">blog</a>
+        
+            <a href="/tags/hugo/">hugo</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo=""
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 limecats Blog
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">목차</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#블로그를-다시-시작하며">블로그를 다시 시작하며</a></li>
+    <li><a href="#전까지-거쳤던-것들">전까지 거쳤던 것들</a>
+      <ol>
+        <li><a href="#티스토리">티스토리</a></li>
+        <li><a href="#velog">velog</a></li>
+        <li><a href="#gitpage">gitpage</a>
+          <ol>
+            <li><a href="#nuxt">Nuxt</a></li>
+            <li><a href="#jekyll">Jekyll</a></li>
+            <li><a href="#gatsby">Gatsby</a></li>
+            <li><a href="#hugo">Hugo</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#마치며">마치며</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
