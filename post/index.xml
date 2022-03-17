@@ -2,16 +2,16 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>Posts on limecats Blog</title>
-        <link>https://example.com/post/</link>
+        <link>https://limecats0331.github.io/post/</link>
         <description>Recent content in Posts on limecats Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 16 Mar 2022 21:26:49 +0900</lastBuildDate><atom:link href="https://example.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 16 Mar 2022 21:26:49 +0900</lastBuildDate><atom:link href="https://limecats0331.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>화폐와 블록체인에 대한 나의 생각</title>
-        <link>https://example.com/p/%ED%99%94%ED%8F%90%EC%99%80-%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81/</link>
+        <link>https://limecats0331.github.io/p/%ED%99%94%ED%8F%90%EC%99%80-%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81/</link>
         <pubDate>Wed, 16 Mar 2022 21:26:49 +0900</pubDate>
         
-        <guid>https://example.com/p/%ED%99%94%ED%8F%90%EC%99%80-%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81/</guid>
+        <guid>https://limecats0331.github.io/p/%ED%99%94%ED%8F%90%EC%99%80-%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81/</guid>
         <description>&lt;p&gt;이 글은 비전문가가 썼으며 주관적인 생각이 가득합니다.&lt;/p&gt;
 &lt;h2 id=&#34;이-글을-쓰게-된-계기&#34;&gt;이 글을 쓰게 된 계기&lt;/h2&gt;
 &lt;blockquote&gt;
@@ -60,10 +60,10 @@
         </item>
         <item>
         <title>블로그 삽질기</title>
-        <link>https://example.com/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/</link>
+        <link>https://limecats0331.github.io/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/</link>
         <pubDate>Tue, 15 Mar 2022 21:00:33 +0900</pubDate>
         
-        <guid>https://example.com/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/</guid>
+        <guid>https://limecats0331.github.io/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/</guid>
         <description>&lt;h2 id=&#34;블로그를-다시-시작하며&#34;&gt;블로그를 다시 시작하며&lt;/h2&gt;
 &lt;p&gt;이전에 &lt;strong&gt;TIL(Today I Learned)&lt;/strong&gt; 을 하는 것이 공부에 도움이 된다는 소리에 블로그를 시작했던 적이 있다. 하지만 초창기에 문법 배우는 와중에 &lt;strong&gt;TIL&lt;/strong&gt; 이라고 따로 쓸것도 없었고, 매일 남들에게 보여주기 위한 공부를 한다는 생각이 들어서 블로그를 접었다.&lt;/p&gt;
 &lt;p&gt;그 후에 &lt;strong&gt;Notion&lt;/strong&gt; 을 사용해서 공부한 것을 정리하고 있었다. 막상 &lt;strong&gt;Notion&lt;/strong&gt; 을 사용해서 정리하다보니깐 나먼 본다는 생각에 좀 적당적당히 찾아보고 대충 넘어가려는 생각이 들어서 다시 블로그에 대한 생각이 늘었다.&lt;/p&gt;
