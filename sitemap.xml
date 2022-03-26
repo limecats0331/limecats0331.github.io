@@ -4,35 +4,57 @@
   <url>
     <loc>https://limecats0331.github.io/categories/</loc>
     <lastmod>2022-03-16T21:26:49+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/</loc>
     <lastmod>2022-03-16T21:26:49+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/post/</loc>
     <lastmod>2022-03-16T21:26:49+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/tags/</loc>
     <lastmod>2022-03-16T21:26:49+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/tags/%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8/</loc>
     <lastmod>2022-03-16T21:26:49+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/categories/%EC%A3%BC%EC%A0%88%EC%A3%BC%EC%A0%88/</loc>
     <lastmod>2022-03-16T21:26:49+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/p/%ED%99%94%ED%8F%90%EC%99%80-%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81/</loc>
     <lastmod>2022-03-16T21:26:49+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/tags/blog/</loc>
     <lastmod>2022-03-15T21:00:33+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/categories/blog/</loc>
     <lastmod>2022-03-15T21:00:33+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/tags/hugo/</loc>
     <lastmod>2022-03-15T21:00:33+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url><url>
     <loc>https://limecats0331.github.io/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/</loc>
     <lastmod>2022-03-15T21:00:33+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
 </urlset>
