@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Posts on limecats Blog</title>
-        <link>https://limecats0331.github.io/post/</link>
-        <description>Recent content in Posts on limecats Blog</description>
+        <title>study on limecats Blog</title>
+        <link>https://limecats0331.github.io/categories/study/</link>
+        <description>Recent content in study on limecats Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Mon, 28 Mar 2022 04:46:25 +0900</lastBuildDate><atom:link href="https://limecats0331.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 28 Mar 2022 04:46:25 +0900</lastBuildDate><atom:link href="https://limecats0331.github.io/categories/study/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>vue-express 연동하기 2022</title>
         <link>https://limecats0331.github.io/p/vue-express-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0-2022/</link>
         <pubDate>Mon, 28 Mar 2022 04:46:25 +0900</pubDate>
@@ -264,100 +264,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;이제 &lt;code&gt;http://localhost:3000/&lt;/code&gt; 로 접속하면 빌드한 &lt;code&gt;vue&lt;/code&gt;파일을 볼 수 있다. 또한 routing한 페이지도 잘 보이고 새로고침해도 &lt;code&gt;404&lt;/code&gt; 오류가 나지 않는 것을 볼 수 있다.&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>화폐와 블록체인에 대한 나의 생각</title>
-        <link>https://limecats0331.github.io/p/%ED%99%94%ED%8F%90%EC%99%80-%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81/</link>
-        <pubDate>Wed, 16 Mar 2022 21:26:49 +0900</pubDate>
-        
-        <guid>https://limecats0331.github.io/p/%ED%99%94%ED%8F%90%EC%99%80-%EB%B8%94%EB%A1%9D%EC%B2%B4%EC%9D%B8%EC%97%90-%EB%8C%80%ED%95%9C-%EB%82%98%EC%9D%98-%EC%83%9D%EA%B0%81/</guid>
-        <description>&lt;p&gt;이 글은 비전문가가 썼으며 주관적인 생각이 가득합니다.&lt;/p&gt;
-&lt;h2 id=&#34;이-글을-쓰게-된-계기&#34;&gt;이 글을 쓰게 된 계기&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;div class=&#34;video-wrapper&#34;&gt;
-    &lt;iframe loading=&#34;lazy&#34; 
-            src=&#34;https://www.youtube.com/embed/ETcVO6lBgkQ&#34; 
-            allowfullscreen 
-            title=&#34;YouTube Video&#34;
-    &gt;
-    &lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;/blockquote&gt;
-&lt;blockquote&gt;
-&lt;div class=&#34;video-wrapper&#34;&gt;
-    &lt;iframe loading=&#34;lazy&#34; 
-            src=&#34;https://www.youtube.com/embed/eT_5GahCdIs&#34; 
-            allowfullscreen 
-            title=&#34;YouTube Video&#34;
-    &gt;
-    &lt;/iframe&gt;
-&lt;/div&gt;
-
-&lt;/blockquote&gt;
-&lt;p&gt;위의 영상을 보면서 지금 블록체인들이 블록체인지만 플랫폼 위주의 중앙 집권적인 모습을 보여주고 있는 것에 대해서 생각을 하다가 아래 영상을 보게 되었다. 그러면서 암호화폐와 그 시작인 비트코인의 시작이 어땠는지 생각이 났고 이에 대해 나의 생각을 적어보고자 한다.&lt;/p&gt;
-&lt;h2 id=&#34;화폐&#34;&gt;화폐&lt;/h2&gt;
-&lt;p&gt;우리는 이전에 물물교환이라는 형태로 거래를 했다. 하지만 기원전 3200년전 우리는 금이나 은처럼 가치있는 금속을 사용해서 화폐를 제작했다. 이때 화폐는 그 자체로도 가치를 지니고 있었다. 왜냐하면 귀중한 물질로 이루어져 있으니깐!&lt;/p&gt;
-&lt;p&gt;그 후에 무거운 금속 화폐를 대체할 목적으로 종이 화폐인 지폐를 사용하려는 노력을 했다. 하지만 지폐 발행을 통한 인플레이션을 막지 못했고 흐지부지되었다. 여기서 &lt;strong&gt;금핵 금본위제&lt;/strong&gt;가 나오면서 상황이 바뀌게 된다.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;금핵 금본위제&lt;/strong&gt;란 금을 은행에 보관하고 금 보관량만큼만 통화를 발행해서 지폐를 가지고 온 사람에게 실제 금과 교환해주는 것을 의미한다. 이때까지만 해도 그래도 지폐, 화폐에는 어느 정도 실질적인 가치를 가지고 있다.&lt;/p&gt;
-&lt;p&gt;추후에 미국이 금본위제를 폐지했고 그 후 지폐는 수표나 어음처럼 신용 화폐의 길로 들어서게 된다.&lt;/p&gt;
-&lt;h2 id=&#34;미국의-제재&#34;&gt;미국의 제재&lt;/h2&gt;
-&lt;p&gt;이번 러시아와 우크라이나 사이의 전쟁에서 미국의 경제 제재를 보기 전까진 신용 화폐에 대한 별 다른 생각이 없었다. 하지만 슈카님의 영상을 보고 미국의 강력함 이런 것보다는 화폐에 대한 신용에 대한 생각이 먼저 들게 되었다.&lt;/p&gt;
-&lt;p&gt;이렇게 중앙 집권적인 단일 화폐의 강한 권력이 좋은 것일까? 만약 달러가 아니고 중국의 위안의 저런 위상을 가지고 있다면? 그리고 이러한 것들이 배제된 것이 뭐가 있을까? 하니 바로 블록체인을 이용한 암호화폐들이었다.&lt;/p&gt;
-&lt;h2 id=&#34;탈-중앙화-그-자체&#34;&gt;탈 중앙화 그 자체&lt;/h2&gt;
-&lt;p&gt;테헤란밸리의 영상에서 블록체인이라는 기술이 얘기하는 데이터의 분산 처리라는 것이 결국 현재의 중앙 집권적인 서버-클라이언트 구조에 비해 장점이 무엇이며 어떤 이점이 있는지 모르겠다. 그리고 플랫폼을 기반으로 결국 중앙 집권적인 모습을 보이는 것 때문에 다른 점이 뭔지 모르겠다고 한다. 여기서 중요한 것은 탈 중앙화의 장점과 특징보다 탈 중앙화 그 자체라고 생각한다.&lt;/p&gt;
-&lt;p&gt;지금의 블록체인 기술들은 중앙집권적인 모습을 벗어나지 못했지만 이건 기존의 체제에서 멀리 벗어날 수 없기 때문에 이러한 모습을 띄는거지 점점 더 발전한다면 달라질 가능성은 충분하다고 생각한다.&lt;/p&gt;
-&lt;p&gt;초기의 AI 관련 산업들이 말만 AI지 대부분 그냥 알고리즘적인 처리를 했던 것처럼 말이다.&lt;/p&gt;
-&lt;p&gt;그리고 지금의 각 나라의 이득을 위해서 언제든지 없어질 수 있는 신용 말고 좀 더 자유롭고 평등한 화폐시스템이 있어야 되지 않나 싶다. 나도 최소한의 혹시 문제가 생겼을 때 급하게 해결가능한 수준에서 암호화폐를 들고 있는게 좋을 거라고 생각한다.&lt;/p&gt;
-&lt;h2 id=&#34;마지막으로&#34;&gt;마지막으로&lt;/h2&gt;
-&lt;p&gt;글 쓰는 재주가 없고 대충 생각나는 대로 주절주절 쓴거라 블로그에 쓸지 노션에 쓸지 고민했는데 그래도 블로그에 쓴다고 생각하고 쓰니깐 어느정도 정리가 된 느낌이라 좋은 것 같다.&lt;/p&gt;
-&lt;p&gt;생각을 정리하면서 다양한 블록체인 관련 아이디어가 생각났다.&lt;/p&gt;
-&lt;p&gt;현재 &lt;code&gt;NFT&lt;/code&gt; 기술이 이미지의 &lt;code&gt;URL&lt;/code&gt;만을 담고 있는 한계를 깨기 위해서 토큰에 구매자에 대한 정보를 저장하고 사진에 스테가노그래피 등을 이용해서 토큰을 집어넣는다던가&lt;/p&gt;
-&lt;p&gt;기부를 할때 &lt;code&gt;NFT&lt;/code&gt;를 발행해서 기부받은 사람들이 기부받은 금액으로 어떻게 사용했고 지금의 홀더에게 뭔가를 지급하는 형식으로 일지를 남기는 방법등이다.&lt;/p&gt;
-&lt;p&gt;처음 미쿠의 콘서트를 보면서 저런걸로 아이돌을 만들 수 있다면 스캔들도 없고 전세계 동시 콘서트도 가능하고 진짜 대박이 아닐까 싶었는데 VR세계에서 아이돌도 하고 요즘 기사들보면 광고받아서 대놓고 밀어주는 가상 인간들도 있던데 나중에 내가 작성한 글을 보면서 이런게 진짜 나왔네 하는 것도 재밌을 것 같다.&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>블로그 삽질기</title>
-        <link>https://limecats0331.github.io/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/</link>
-        <pubDate>Tue, 15 Mar 2022 21:00:33 +0900</pubDate>
-        
-        <guid>https://limecats0331.github.io/p/%EB%B8%94%EB%A1%9C%EA%B7%B8-%EC%82%BD%EC%A7%88%EA%B8%B0/</guid>
-        <description>&lt;h2 id=&#34;블로그를-다시-시작하며&#34;&gt;블로그를 다시 시작하며&lt;/h2&gt;
-&lt;p&gt;이전에 &lt;strong&gt;TIL(Today I Learned)&lt;/strong&gt; 을 하는 것이 공부에 도움이 된다는 소리에 블로그를 시작했던 적이 있다. 하지만 초창기에 문법 배우는 와중에 &lt;strong&gt;TIL&lt;/strong&gt; 이라고 따로 쓸것도 없었고, 매일 남들에게 보여주기 위한 공부를 한다는 생각이 들어서 블로그를 접었다.&lt;/p&gt;
-&lt;p&gt;그 후에 &lt;strong&gt;Notion&lt;/strong&gt; 을 사용해서 공부한 것을 정리하고 있었다. 막상 &lt;strong&gt;Notion&lt;/strong&gt; 을 사용해서 정리하다보니깐 나먼 본다는 생각에 좀 적당적당히 찾아보고 대충 넘어가려는 생각이 들어서 다시 블로그에 대한 생각이 늘었다.&lt;/p&gt;
-&lt;p&gt;그래서 블로그를 시작하려고 하면서 했던 삽질들에 대해서 적어보고자 한다.&lt;/p&gt;
-&lt;h2 id=&#34;전까지-거쳤던-것들&#34;&gt;전까지 거쳤던 것들&lt;/h2&gt;
-&lt;h3 id=&#34;티스토리&#34;&gt;티스토리&lt;/h3&gt;
-&lt;p&gt;기존에 &lt;strong&gt;TIL&lt;/strong&gt; 할때 썼던 블로그다. 다 좋은데 기본 마크다운이 정말 거지같다. 그래서 이번에 css변경해서 마크다운 스타일을 바꿔서 써보려고 했다. &lt;a class=&#34;link&#34; href=&#34;https://starrykss.tistory.com/1140&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;링크&lt;/a&gt;를 참고해서 변경해봤는데 뭔가.. 뭔가 아쉽게 내가 원하는 스타일이 나오지 않았다.&lt;/p&gt;
-&lt;p&gt;굳이 더 삽질하고 뭘 더 하는 시간에 다른 플랫폼이나 벙법도 경험해보고 안되면 마지막에 다시 하자는 마인드로 패스!&lt;/p&gt;
-&lt;h3 id=&#34;velog&#34;&gt;velog&lt;/h3&gt;
-&lt;p&gt;개인적으로 생긴게 깔쌈하고 글쓰기도 좋고 나쁘지 않아보이긴 했는데 블로그라기 보다는 블로그 형식의 글을 모아둔 플랫폼? 이라는 느낌을 지울 수 없었다. 특정 키워드(&lt;code&gt;pwd&lt;/code&gt;, &lt;code&gt;content&lt;/code&gt;,&lt;code&gt;coinone&lt;/code&gt; 등)가 들어가면 자동으로 검열되서 비공개로 전환된다거나 하는 점이 뭔가 아쉽게 느껴졌다. 또한 개발에 관련된 이야기만 올려야 될 것 같은 느낌이 싫었다.&lt;/p&gt;
-&lt;p&gt;일단 &lt;strong&gt;gitpage&lt;/strong&gt;로 만들어보고 너무 오래 걸리거나 복잡할 것 같으면 임시로 사용하고 나중에 틈틈히 만들어서 넘어갈 생각에 패스!&lt;/p&gt;
-&lt;h3 id=&#34;gitpage&#34;&gt;gitpage&lt;/h3&gt;
-&lt;p&gt;결국 뭔가 하니씩 맘에 드는게 없으니깐 만들어쓰자 라는 결론에 다다랐다.&lt;/p&gt;
-&lt;p&gt;Jekyll, Hugo, Gatsby, Nuxt 등 &lt;a class=&#34;link&#34; href=&#34;https://jamstack.org/generators/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;옵션&lt;/a&gt;도 많았고 그만큼 삽질도 많았다. 우선 제일 중요하게 생각한 것은 &lt;em&gt;원하는 테마가 있는가?&lt;/em&gt; 였다. 우선 디자인에는 자신이 없었고 블로그를 위해서 처음부터 만드는 건 주객전도라는 느낌에서 이미 만들어진 테마에서 조금씩 손보는 수준에서 해결되길 원했다.&lt;/p&gt;
-&lt;h4 id=&#34;nuxt&#34;&gt;Nuxt&lt;/h4&gt;
-&lt;p&gt;지금 공부하고 있는 &lt;strong&gt;Vue&lt;/strong&gt; 기반으로 만들어져서 수정하기 편해보였으나 블로그 용으로 사용하는 사람은 없어서 그런지 테마가 없었고 그렇게 제외되었다.&lt;/p&gt;
-&lt;h4 id=&#34;jekyll&#34;&gt;Jekyll&lt;/h4&gt;
-&lt;p&gt;우선 깃허브 공동창업자가 만들기도 했고 오래되서 테마도 많고 강의도 많았다. 근데 더 인기있는 것들은 이유가 있지 않을까 싶어서 다른 것들을 시도해보고 나중에 해볼 생각으로 패스.&lt;/p&gt;
-&lt;h4 id=&#34;gatsby&#34;&gt;Gatsby&lt;/h4&gt;
-&lt;p&gt;제목이 블로그 삽질기지만 사실 &lt;strong&gt;Gatsby&lt;/strong&gt; 삽질기라고 생각해도 좋을 것이다. 일단 기본으로 설치했을 때는 잘 작동하는 것처럼 보였다. 그래서 맘에 드는 테마를 하나 찾았다. 이름은 &lt;a class=&#34;link&#34; href=&#34;https://github.com/JaeYeopHan/gatsby-starter-bee&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;gatsby-starter-bee&lt;/a&gt; 이다.&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;Read.me&lt;/code&gt;를 보고 설치할 때부터 갑자기 오류를 뱉기 시작한다. 그렇게 이슈를 뒤져보니깐 &lt;em&gt;&lt;strong&gt;Node 16&lt;/strong&gt;&lt;/em&gt; 이상 버전은 지원하지 않는다는 것을 봤다. 그래서 &lt;code&gt;nvm&lt;/code&gt; 를 이용해서 &lt;em&gt;&lt;strong&gt;Node 14&lt;/strong&gt;&lt;/em&gt; 로 낮추니깐 설치하는데 문제가 발생하지 않았다.&lt;/p&gt;
-&lt;p&gt;그리고 &lt;code&gt;npm start&lt;/code&gt;를 해서 띄워보니깐 이미지와 관련된 것들이 죄다 오류를 뱉기 시작했다. 그렇게 블로그는 떳는데 이미지는 하나도 안뜨는 상황이 발생했다!&lt;/p&gt;
-&lt;p&gt;그렇게 다시 구글링해본 결과 silicon mac에서 &lt;code&gt;gatsby-plugin-sharp&lt;/code&gt;라는 플러그인을 사용하는데 생기는 문제였다. 그래서 &lt;code&gt;sharp&lt;/code&gt;의 &lt;a class=&#34;link&#34; href=&#34;https://github.com/lovell/sharp/issues/2460&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;이슈&lt;/a&gt;를 찾아서 해결하려고 했으나 결국 해결하지 못했다.&lt;/p&gt;
-&lt;p&gt;그렇게 제일 맘에 드는 테마였는데 결국 &lt;strong&gt;Gatsby&lt;/strong&gt;는 포기하게 되었다.&lt;/p&gt;
-&lt;h4 id=&#34;hugo&#34;&gt;Hugo&lt;/h4&gt;
-&lt;p&gt;휴고에 대한 자세한 이야기는 다른 블로그를 찾아봐도 잘 나와있으니깐 제외하고 테마 중에 제일 맘에 드는 테마를 선정해서 설치해보았다. 선정한 테마는 &lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Hugo Theme Stack&lt;/a&gt;이다.&lt;/p&gt;
-&lt;p&gt;우선 설치하는데 딱히 지장이 없었지만 tablet 사이즈에서 오른쪽 위젯이 안 보이거나 하는 살짝 아쉬운 점이 있지만 이 정도는 구글링으로 해결 가능할 것으로 보이고 그 밖에 다른 큰 문제점은 보이지 않아서 결국 &lt;strong&gt;Hugo&lt;/strong&gt; 에 정착하기로 했다.&lt;/p&gt;
-&lt;h2 id=&#34;마치며&#34;&gt;마치며&lt;/h2&gt;
-&lt;p&gt;아직 댓글 기능도 넣지 않았고 검색에 노출되도록 설정도 안했고 &lt;code&gt;google analytic&lt;/code&gt;도 설정 안 해놨지만 우선 글을 쓰고 생각을 정리하여 기록해둔다는 큰 목적은 만족했으니깐 첫 글을 작성하게 되었다. 이번 블로그는 남에게 보여주기 위한 무언가가 아니라 나를 위한 공간으로 잘 꾸며가고 싶다.&lt;/p&gt;
 </description>
         </item>
         
