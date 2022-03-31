@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Cookie on limecats Blog</title>
+        <link>https://limecats0331.github.io/tags/cookie/</link>
+        <description>Recent content in Cookie on limecats Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Wed, 30 Mar 2022 14:18:16 +0900</lastBuildDate><atom:link href="https://limecats0331.github.io/tags/cookie/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>왜 JWT를 골랐을까?</title>
+        <link>https://limecats0331.github.io/p/%EC%99%9C-jwt%EB%A5%BC-%EA%B3%A8%EB%9E%90%EC%9D%84%EA%B9%8C/</link>
+        <pubDate>Wed, 30 Mar 2022 14:18:16 +0900</pubDate>
+        
+        <guid>https://limecats0331.github.io/p/%EC%99%9C-jwt%EB%A5%BC-%EA%B3%A8%EB%9E%90%EC%9D%84%EA%B9%8C/</guid>
+        <description>&lt;h2 id=&#34;들어가기-앞서&#34;&gt;들어가기 앞서&lt;/h2&gt;
+&lt;p&gt;이번에 토이 프로젝트인 &lt;code&gt;Battle-city&lt;/code&gt;를 구상하면서 회원가입을 기능이 필요해서 인증에 대해서 공부하게 되었다. &lt;code&gt;cookie&lt;/code&gt;, &lt;code&gt;session&lt;/code&gt;, &lt;code&gt;JWT&lt;/code&gt;, &lt;code&gt;Oauth&lt;/code&gt; 등 많은 방식이 있는데 왜 &lt;code&gt;JWT&lt;/code&gt; 방식을 골랐는지 다른 방식은 어떤 장단점이 있는지 알아보고자 한다.&lt;/p&gt;
+&lt;h2 id=&#34;인증&#34;&gt;인증&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;인증&lt;/strong&gt;은 &lt;strong&gt;서비스에 등록된 유저의 신원을 입증&lt;/strong&gt;하는 것이라고 생각하면 된다. 예를 들면 신분증을 통해서 신원을 파악한다거나 학생증을 통해서 학교에 등록된 학생이라는 것을 입증하는 것과 같다고 보면 된다.&lt;/p&gt;
+&lt;p&gt;그리고 인증하면 빼놓을 수 없는 것이 &lt;strong&gt;인가&lt;/strong&gt;이다. 인가는 &lt;strong&gt;인증된 사용자에 대한 자원 접근 권한&lt;/strong&gt;이라고 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;고로 서비스는 유저의 신원을 파악해서 &lt;em&gt;인증&lt;/em&gt;을 해주고 인증한 유저의 신원에 따라서 &lt;em&gt;인가&lt;/em&gt;받은 범위 내에서 리소스를 제공하는 것이다.&lt;/p&gt;
+&lt;p&gt;근데 여기서 중요한 점이 있다. 우리는 보통 대화를 할때 이전에 말했던 것을 기억하고 누구와 대화하고 있는지를 기억하고 그에 맞게 대답한다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;statefull&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;나: 여기 콜라 있어요?&lt;/p&gt;
+&lt;p&gt;상대: 있어요~&lt;/p&gt;
+&lt;p&gt;나: 그럼 그거 하나 주세요.&lt;/p&gt;
+&lt;p&gt;상대: 1500원입니다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;하지만 우리의 서버와 클라이언트가 사용하는 &lt;code&gt;http&lt;/code&gt;는 그렇지 못하고 &lt;code&gt;stateless&lt;/code&gt;하다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;stateless&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;나: 여기 콜라 있어요?&lt;/p&gt;
+&lt;p&gt;상대: 있어요~&lt;/p&gt;
+&lt;p&gt;나: 그럼 그거 하나 주세요.&lt;/p&gt;
+&lt;p&gt;상대: 그거가 뭔데요?&lt;/p&gt;
+&lt;p&gt;나: ?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;그렇기 때문에 우리는 별도의 인증 방법을 거쳐야된다.&lt;/p&gt;
+&lt;h3 id=&#34;request-header&#34;&gt;&lt;code&gt;Request Header&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&#34;https://limecats0331.github.io/img/why_jwt/server_client.svg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;http_img&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;처음엔 사진에서 보이는 &lt;code&gt;HTTP Request&lt;/code&gt;할때 &lt;code&gt;Header&lt;/code&gt;안에 유저의 &lt;code&gt;id&lt;/code&gt;와 &lt;code&gt;password&lt;/code&gt;를 같이 보내보았다.&lt;/p&gt;
+&lt;p&gt;하지만 이 방식을 사용하면 매번 로그인을 해줘야되는 단점이 있었다. 만약 유저가 글을 쓴다고하면 로그인을 해야되고 끝나고 수정을 해야된다? 또 로그인을 해야되는 것이다.&lt;/p&gt;
+&lt;p&gt;어떻게 보내는 지에 대해서는 이 &lt;a class=&#34;link&#34; href=&#34;https://youtu.be/y0xMXlOAfss?t=384&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;영상&lt;/a&gt;을 참고하면 된다.&lt;/p&gt;
+&lt;h3 id=&#34;cookie&#34;&gt;&lt;code&gt;Cookie&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;그래서 우리는 브라우저의 힘을 빌리기로 한다! 바로 &lt;code&gt;Cookie&lt;/code&gt;라는 저장공간을 사용하는 것이다. 그러면 브라우저가 &lt;code&gt;id&lt;/code&gt;와 &lt;code&gt;password&lt;/code&gt;를 쿠키에 저장해놨다가 인증이 필요할 때마다 같이 보내주게 된다.&lt;/p&gt;
+&lt;p&gt;그래서 유저는 좀 더 편해졌지만 보안상의 문제가 발생했다. 보통은 클라이언트가 서버보다 보안에 취약하기 때문에 쿠키 안의 정보를 탈취하거나 쿠키 그 자체를 탈취하는 등의 보안상의 문제가 발생했다.&lt;/p&gt;
+&lt;h3 id=&#34;session&#34;&gt;&lt;code&gt;session&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;그러면 상대적으로 보안이 더 좋은 서버에 맡기면 되지 않을까? 라는 생각으로 &lt;code&gt;session&lt;/code&gt;이라는 방식이 나왔다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://limecats0331.github.io/img/why_jwt/session.svg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;세션&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;유저는 최초의 로그인 시에 &lt;code&gt;id&lt;/code&gt;와 &lt;code&gt;password&lt;/code&gt;를 서버에 보낸다. 그 후에 서버는 &lt;code&gt;DB&lt;/code&gt;에 대조하여 확인하고 확인되면 서버에 &lt;code&gt;session id&lt;/code&gt;와 유저를 식별할 것을 저장하고 &lt;code&gt;session id&lt;/code&gt;를 유저에게 보내준다.&lt;/p&gt;
+&lt;p&gt;그리고 그 후로 &lt;code&gt;session id&lt;/code&gt;를 가지고 요청을 보내면 &lt;code&gt;db&lt;/code&gt;로 가는게 아니고 서버에서 확인을 거치는 방식이다.&lt;/p&gt;
+&lt;p&gt;아직도 약간의 문제가 있는데 만약 서비스가 커지면서 scale-out을 했다고 치자.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://limecats0331.github.io/img/why_jwt/many_server.svg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;scale-out&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;그러면 로그인 요청을 3번째 서버에 해서 &lt;code&gt;session id&lt;/code&gt;를 받는다고 가정해보자. 그리고 다음 요청을 첫번째 서버로 하게 된다면? 해당 서버에는 &lt;code&gt;session id&lt;/code&gt;가 없기 때문에 새로운 &lt;code&gt;session id&lt;/code&gt;를 만들게 된다.&lt;/p&gt;
+&lt;p&gt;이러한 문제를 해결하기 위해서 우리는 &lt;code&gt;session DB&lt;/code&gt;를 따로 둔다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://limecats0331.github.io/img/why_jwt/with_session_storage.svg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;session_storage&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;이러한 &lt;code&gt;session&lt;/code&gt; 방식도 결국 문제점이 발생하게 되는데 바로 &lt;code&gt;client&lt;/code&gt;들이 많아지게 되는 경우이다. 그렇게 되면 &lt;code&gt;session DB&lt;/code&gt;에 과도한 요청이 몰려서 문제가 발생하는 것이다.&lt;/p&gt;
+&lt;h3 id=&#34;json-web-token&#34;&gt;&lt;code&gt;JSON Web Token&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;우리는 각각 &lt;code&gt;client&lt;/code&gt;, &lt;code&gt;server&lt;/code&gt;, &lt;code&gt;DB(storage)&lt;/code&gt;에게 유저에 관한 state를 맡겨서 처리해봤다. 모두 어떠한 문제점을 가지고 있었다. 그래서 다른 곳을 찾았는데 바로 &lt;code&gt;http&lt;/code&gt; 요청에 맡기는 것이다.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;JWT&lt;/code&gt;는 &lt;code&gt;secret key&lt;/code&gt;를 이용한다. 서버는 로그인한 유저에게 유저에 대한 정보와 &lt;code&gt;secret key&lt;/code&gt;를 암호화한 것을 같이 보낸다. 그럼 유저는 그 &lt;code&gt;token&lt;/code&gt;을 저장하고 있다가 인증이 필요할때 같이 보내게 된다. 그럼 서버에서는 받은 &lt;code&gt;token&lt;/code&gt;에 담긴 &lt;code&gt;secret key&lt;/code&gt;를 보고 인증되었음을 확인한다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://limecats0331.github.io/img/why_jwt/JWT.svg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;JWT&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;이러한 &lt;code&gt;token&lt;/code&gt; 방식은 단순히 &lt;code&gt;key&lt;/code&gt;를 서버에 저장함으로 규모가 커져 &lt;code&gt;scale-out&lt;/code&gt;하더라도 각각의 서버에서 요청을 처리할 수 있다.&lt;/p&gt;
+&lt;p&gt;하지만 &lt;code&gt;JWT&lt;/code&gt; 또한 토큰을 브라우저에 저장함으로써 쿠키와 같은 보안상의 문제가 발생한다. 이를 위해서 &lt;code&gt;token&lt;/code&gt;에 만료기한을 설정하는데 만료기한은 보안상의 이점도 가져오지만 유저의 불편함도 가지고 온다. 그래서 서버는 &lt;code&gt;access-token&lt;/code&gt;과 &lt;code&gt;refresh-token&lt;/code&gt;을 나눠서 생성한다. 이것을 유저에게 같이 보내주고 &lt;code&gt;refresh-token&lt;/code&gt;은 따로 저장한다.&lt;/p&gt;
+&lt;p&gt;만약 &lt;code&gt;access-token&lt;/code&gt;이 만료되면 &lt;code&gt;refresh-token&lt;/code&gt;을 통해서 인증을 확인하고 &lt;code&gt;access-token&lt;/code&gt;을 재발급해주는 것이다. 세션과 비슷하게 저장소가 따로 필요하지만 요청하는 횟수는 훨씬 줄어서 부하를 줄일 수 있다.&lt;/p&gt;
+&lt;p&gt;물론 &lt;code&gt;JWT&lt;/code&gt;가 완벽한 방식이라서 단점이 없는 것은 아니다. 다른 방식에 비해서 &lt;code&gt;token&lt;/code&gt;의 길이가 길기 때문에 네트워크에 부하를 줄 수 있고 만약 유저의 데이터를 직접 수정하는 경우에 토큰을 직접적으로 수정할 수 없는 문제가 있다.&lt;/p&gt;
+&lt;h2 id=&#34;그래서-왜-jwt&#34;&gt;그래서 왜 &lt;code&gt;JWT&lt;/code&gt;?&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;session&lt;/code&gt;을 사용하는 방식이 꼭 나쁘거나 안 좋은 것은 아니다. 아직도 많은 기업들이 &lt;code&gt;session&lt;/code&gt;방식을 사용하고 있는데 이는 유저의 로그인 정보를 직접 저장함으로써 생기는 이점들이 있기 때문이다.&lt;/p&gt;
+&lt;p&gt;예를 들면 &lt;strong&gt;구글&lt;/strong&gt;은 자신이 로그인한 기기들의 정보를 보고 원치 않은 기기에 접속되있는 경우 로그아웃 하는 기능을 가지고 있다. 또한 원한다면 유저의 정보를 변경했더라도 로그인을 유지할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://limecats0331.github.io/img/why_jwt/google_device.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;google_device&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;이처럼 유저의 인증을 직접 활용하고 추적한다고 하면 &lt;code&gt;session&lt;/code&gt;은 좋은 방법일 것이다.&lt;/p&gt;
+&lt;p&gt;하지만 나는 금전적으로나 사업적으로 &lt;code&gt;session DB&lt;/code&gt;를 사서 유지할 능력이 없고 굳이 유저에 대해서 추적할 필요가 없기 때문에 &lt;code&gt;JWT&lt;/code&gt; 방식을 선택했다.&lt;/p&gt;
+&lt;h2 id=&#34;추가&#34;&gt;추가&lt;/h2&gt;
+&lt;p&gt;이 밖에도 별도의 인증서버를 두는 &lt;code&gt;OAuth&lt;/code&gt;, &lt;code&gt;OAuth&lt;/code&gt;를 이용해서 다른 인터넷 서비스 제공자의 정보를 받아서 인증하는 방식 등 더 많은 방식들이 있었지만 큰 틀에서 보면 &lt;code&gt;token&lt;/code&gt;을 사용한다는 점에서 크게 다르지 않아보였다. 그래서 필요하다면 추후에 추가할 예정이다.&lt;/p&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

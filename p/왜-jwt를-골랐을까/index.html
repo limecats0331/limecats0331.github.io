@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='들어가기 앞서 이번에 토이 프로젝트인 Battle-city를 구상하면서 회원가입을 기능이 필요해서 인증에 대해서 공부하게 되었다. cookie, session, JWT, Oauth 등 많은 방식이 있는데 왜 JWT 방식을 골랐는지 다른 방식은 어떤 장단점이 있는지 알아보고자 한다.
+인증 인증은 서비스에 등록된 유저의 신원을 입증하는 것이라고 생각하면 된다. 예를 들면 신분증을 통해서 신원을 파악한다거나 학생증을 통해서 학교에 등록된 학생이라는 것을 입증하는 것과 같다고 보면 된다.
+그리고 인증하면 빼놓을 수 없는 것이 인가이다. 인가는 인증된 사용자에 대한 자원 접근 권한이라고 볼 수 있다.'><title>왜 JWT를 골랐을까?</title>
+
+<link rel='canonical' href='https://limecats0331.github.io/p/%EC%99%9C-jwt%EB%A5%BC-%EA%B3%A8%EB%9E%90%EC%9D%84%EA%B9%8C/'>
+
+<link rel="stylesheet" href="/scss/style.min.4c6674dd77a6b8df901ddbc754515dfe323079b9a4bd2ad152215655a1cb088c.css"><meta property='og:title' content='왜 JWT를 골랐을까?'>
+<meta property='og:description' content='들어가기 앞서 이번에 토이 프로젝트인 Battle-city를 구상하면서 회원가입을 기능이 필요해서 인증에 대해서 공부하게 되었다. cookie, session, JWT, Oauth 등 많은 방식이 있는데 왜 JWT 방식을 골랐는지 다른 방식은 어떤 장단점이 있는지 알아보고자 한다.
+인증 인증은 서비스에 등록된 유저의 신원을 입증하는 것이라고 생각하면 된다. 예를 들면 신분증을 통해서 신원을 파악한다거나 학생증을 통해서 학교에 등록된 학생이라는 것을 입증하는 것과 같다고 보면 된다.
+그리고 인증하면 빼놓을 수 없는 것이 인가이다. 인가는 인증된 사용자에 대한 자원 접근 권한이라고 볼 수 있다.'>
+<meta property='og:url' content='https://limecats0331.github.io/p/%EC%99%9C-jwt%EB%A5%BC-%EA%B3%A8%EB%9E%90%EC%9D%84%EA%B9%8C/'>
+<meta property='og:site_name' content='limecats Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='JWT' /><meta property='article:tag' content='Authentication' /><meta property='article:tag' content='Session' /><meta property='article:tag' content='Cookie' /><meta property='article:published_time' content='2022-03-30T14:18:16&#43;09:00'/><meta property='article:modified_time' content='2022-03-30T14:18:16&#43;09:00'/>
+<meta name="twitter:title" content="왜 JWT를 골랐을까?">
+<meta name="twitter:description" content="들어가기 앞서 이번에 토이 프로젝트인 Battle-city를 구상하면서 회원가입을 기능이 필요해서 인증에 대해서 공부하게 되었다. cookie, session, JWT, Oauth 등 많은 방식이 있는데 왜 JWT 방식을 골랐는지 다른 방식은 어떤 장단점이 있는지 알아보고자 한다.
+인증 인증은 서비스에 등록된 유저의 신원을 입증하는 것이라고 생각하면 된다. 예를 들면 신분증을 통해서 신원을 파악한다거나 학생증을 통해서 학교에 등록된 학생이라는 것을 입증하는 것과 같다고 보면 된다.
+그리고 인증하면 빼놓을 수 없는 것이 인가이다. 인가는 인증된 사용자에 대한 자원 접근 권한이라고 볼 수 있다.">
+    <link rel="shortcut icon" href="favicon_io/favicon-16x16.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YSQ9JXW8S5"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-YSQ9JXW8S5', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">limecats Blog</a></h1>
+            <h2 class="site-description">열심히 개발 공부하는 블로그</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>다크 모드</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/study/" >
+                study
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%EC%99%9C-jwt%EB%A5%BC-%EA%B3%A8%EB%9E%90%EC%9D%84%EA%B9%8C/">왜 JWT를 골랐을까?</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Mar 30, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 분 정도
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="들어가기-앞서">들어가기 앞서</h2>
+<p>이번에 토이 프로젝트인 <code>Battle-city</code>를 구상하면서 회원가입을 기능이 필요해서 인증에 대해서 공부하게 되었다. <code>cookie</code>, <code>session</code>, <code>JWT</code>, <code>Oauth</code> 등 많은 방식이 있는데 왜 <code>JWT</code> 방식을 골랐는지 다른 방식은 어떤 장단점이 있는지 알아보고자 한다.</p>
+<h2 id="인증">인증</h2>
+<p><strong>인증</strong>은 <strong>서비스에 등록된 유저의 신원을 입증</strong>하는 것이라고 생각하면 된다. 예를 들면 신분증을 통해서 신원을 파악한다거나 학생증을 통해서 학교에 등록된 학생이라는 것을 입증하는 것과 같다고 보면 된다.</p>
+<p>그리고 인증하면 빼놓을 수 없는 것이 <strong>인가</strong>이다. 인가는 <strong>인증된 사용자에 대한 자원 접근 권한</strong>이라고 볼 수 있다.</p>
+<p>고로 서비스는 유저의 신원을 파악해서 <em>인증</em>을 해주고 인증한 유저의 신원에 따라서 <em>인가</em>받은 범위 내에서 리소스를 제공하는 것이다.</p>
+<p>근데 여기서 중요한 점이 있다. 우리는 보통 대화를 할때 이전에 말했던 것을 기억하고 누구와 대화하고 있는지를 기억하고 그에 맞게 대답한다.</p>
+<blockquote>
+<p><strong>statefull</strong></p>
+<p>나: 여기 콜라 있어요?</p>
+<p>상대: 있어요~</p>
+<p>나: 그럼 그거 하나 주세요.</p>
+<p>상대: 1500원입니다.</p>
+</blockquote>
+<p>하지만 우리의 서버와 클라이언트가 사용하는 <code>http</code>는 그렇지 못하고 <code>stateless</code>하다.</p>
+<blockquote>
+<p><strong>stateless</strong></p>
+<p>나: 여기 콜라 있어요?</p>
+<p>상대: 있어요~</p>
+<p>나: 그럼 그거 하나 주세요.</p>
+<p>상대: 그거가 뭔데요?</p>
+<p>나: ?</p>
+</blockquote>
+<p>그렇기 때문에 우리는 별도의 인증 방법을 거쳐야된다.</p>
+<h3 id="request-header"><code>Request Header</code></h3>
+<p><img src="/img/why_jwt/server_client.svg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="http_img"
+	
+	
+></p>
+<p>처음엔 사진에서 보이는 <code>HTTP Request</code>할때 <code>Header</code>안에 유저의 <code>id</code>와 <code>password</code>를 같이 보내보았다.</p>
+<p>하지만 이 방식을 사용하면 매번 로그인을 해줘야되는 단점이 있었다. 만약 유저가 글을 쓴다고하면 로그인을 해야되고 끝나고 수정을 해야된다? 또 로그인을 해야되는 것이다.</p>
+<p>어떻게 보내는 지에 대해서는 이 <a class="link" href="https://youtu.be/y0xMXlOAfss?t=384"  target="_blank" rel="noopener"
+    >영상</a>을 참고하면 된다.</p>
+<h3 id="cookie"><code>Cookie</code></h3>
+<p>그래서 우리는 브라우저의 힘을 빌리기로 한다! 바로 <code>Cookie</code>라는 저장공간을 사용하는 것이다. 그러면 브라우저가 <code>id</code>와 <code>password</code>를 쿠키에 저장해놨다가 인증이 필요할 때마다 같이 보내주게 된다.</p>
+<p>그래서 유저는 좀 더 편해졌지만 보안상의 문제가 발생했다. 보통은 클라이언트가 서버보다 보안에 취약하기 때문에 쿠키 안의 정보를 탈취하거나 쿠키 그 자체를 탈취하는 등의 보안상의 문제가 발생했다.</p>
+<h3 id="session"><code>session</code></h3>
+<p>그러면 상대적으로 보안이 더 좋은 서버에 맡기면 되지 않을까? 라는 생각으로 <code>session</code>이라는 방식이 나왔다.</p>
+<p><img src="/img/why_jwt/session.svg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="세션"
+	
+	
+></p>
+<p>유저는 최초의 로그인 시에 <code>id</code>와 <code>password</code>를 서버에 보낸다. 그 후에 서버는 <code>DB</code>에 대조하여 확인하고 확인되면 서버에 <code>session id</code>와 유저를 식별할 것을 저장하고 <code>session id</code>를 유저에게 보내준다.</p>
+<p>그리고 그 후로 <code>session id</code>를 가지고 요청을 보내면 <code>db</code>로 가는게 아니고 서버에서 확인을 거치는 방식이다.</p>
+<p>아직도 약간의 문제가 있는데 만약 서비스가 커지면서 scale-out을 했다고 치자.</p>
+<p><img src="/img/why_jwt/many_server.svg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="scale-out"
+	
+	
+></p>
+<p>그러면 로그인 요청을 3번째 서버에 해서 <code>session id</code>를 받는다고 가정해보자. 그리고 다음 요청을 첫번째 서버로 하게 된다면? 해당 서버에는 <code>session id</code>가 없기 때문에 새로운 <code>session id</code>를 만들게 된다.</p>
+<p>이러한 문제를 해결하기 위해서 우리는 <code>session DB</code>를 따로 둔다.</p>
+<p><img src="/img/why_jwt/with_session_storage.svg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="session_storage"
+	
+	
+></p>
+<p>이러한 <code>session</code> 방식도 결국 문제점이 발생하게 되는데 바로 <code>client</code>들이 많아지게 되는 경우이다. 그렇게 되면 <code>session DB</code>에 과도한 요청이 몰려서 문제가 발생하는 것이다.</p>
+<h3 id="json-web-token"><code>JSON Web Token</code></h3>
+<p>우리는 각각 <code>client</code>, <code>server</code>, <code>DB(storage)</code>에게 유저에 관한 state를 맡겨서 처리해봤다. 모두 어떠한 문제점을 가지고 있었다. 그래서 다른 곳을 찾았는데 바로 <code>http</code> 요청에 맡기는 것이다.</p>
+<p><code>JWT</code>는 <code>secret key</code>를 이용한다. 서버는 로그인한 유저에게 유저에 대한 정보와 <code>secret key</code>를 암호화한 것을 같이 보낸다. 그럼 유저는 그 <code>token</code>을 저장하고 있다가 인증이 필요할때 같이 보내게 된다. 그럼 서버에서는 받은 <code>token</code>에 담긴 <code>secret key</code>를 보고 인증되었음을 확인한다.</p>
+<p><img src="/img/why_jwt/JWT.svg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="JWT"
+	
+	
+></p>
+<p>이러한 <code>token</code> 방식은 단순히 <code>key</code>를 서버에 저장함으로 규모가 커져 <code>scale-out</code>하더라도 각각의 서버에서 요청을 처리할 수 있다.</p>
+<p>하지만 <code>JWT</code> 또한 토큰을 브라우저에 저장함으로써 쿠키와 같은 보안상의 문제가 발생한다. 이를 위해서 <code>token</code>에 만료기한을 설정하는데 만료기한은 보안상의 이점도 가져오지만 유저의 불편함도 가지고 온다. 그래서 서버는 <code>access-token</code>과 <code>refresh-token</code>을 나눠서 생성한다. 이것을 유저에게 같이 보내주고 <code>refresh-token</code>은 따로 저장한다.</p>
+<p>만약 <code>access-token</code>이 만료되면 <code>refresh-token</code>을 통해서 인증을 확인하고 <code>access-token</code>을 재발급해주는 것이다. 세션과 비슷하게 저장소가 따로 필요하지만 요청하는 횟수는 훨씬 줄어서 부하를 줄일 수 있다.</p>
+<p>물론 <code>JWT</code>가 완벽한 방식이라서 단점이 없는 것은 아니다. 다른 방식에 비해서 <code>token</code>의 길이가 길기 때문에 네트워크에 부하를 줄 수 있고 만약 유저의 데이터를 직접 수정하는 경우에 토큰을 직접적으로 수정할 수 없는 문제가 있다.</p>
+<h2 id="그래서-왜-jwt">그래서 왜 <code>JWT</code>?</h2>
+<p><code>session</code>을 사용하는 방식이 꼭 나쁘거나 안 좋은 것은 아니다. 아직도 많은 기업들이 <code>session</code>방식을 사용하고 있는데 이는 유저의 로그인 정보를 직접 저장함으로써 생기는 이점들이 있기 때문이다.</p>
+<p>예를 들면 <strong>구글</strong>은 자신이 로그인한 기기들의 정보를 보고 원치 않은 기기에 접속되있는 경우 로그아웃 하는 기능을 가지고 있다. 또한 원한다면 유저의 정보를 변경했더라도 로그인을 유지할 수 있다.</p>
+<p><img src="/img/why_jwt/google_device.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="google_device"
+	
+	
+></p>
+<p>이처럼 유저의 인증을 직접 활용하고 추적한다고 하면 <code>session</code>은 좋은 방법일 것이다.</p>
+<p>하지만 나는 금전적으로나 사업적으로 <code>session DB</code>를 사서 유지할 능력이 없고 굳이 유저에 대해서 추적할 필요가 없기 때문에 <code>JWT</code> 방식을 선택했다.</p>
+<h2 id="추가">추가</h2>
+<p>이 밖에도 별도의 인증서버를 두는 <code>OAuth</code>, <code>OAuth</code>를 이용해서 다른 인터넷 서비스 제공자의 정보를 받아서 인증하는 방식 등 더 많은 방식들이 있었지만 큰 틀에서 보면 <code>token</code>을 사용한다는 점에서 크게 다르지 않아보였다. 그래서 필요하다면 추후에 추가할 예정이다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/jwt/">JWT</a>
+        
+            <a href="/tags/authentication/">Authentication</a>
+        
+            <a href="/tags/session/">Session</a>
+        
+            <a href="/tags/cookie/">Cookie</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/vue-express-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0-2022/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">vue-express 연동하기 2022</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js"
+        repo="limecats0331/limecats0331.github.io"
+        issue-term="pathname"
+        theme="gruvbox-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 limecats Blog
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">목차</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#들어가기-앞서">들어가기 앞서</a></li>
+    <li><a href="#인증">인증</a>
+      <ol>
+        <li><a href="#request-header"><code>Request Header</code></a></li>
+        <li><a href="#cookie"><code>Cookie</code></a></li>
+        <li><a href="#session"><code>session</code></a></li>
+        <li><a href="#json-web-token"><code>JSON Web Token</code></a></li>
+      </ol>
+    </li>
+    <li><a href="#그래서-왜-jwt">그래서 왜 <code>JWT</code>?</a></li>
+    <li><a href="#추가">추가</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
