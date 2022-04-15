@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='constructor 쉽게 설명하자면 object를 만들어주는 기계라고 생각하면 된다. 예를 들어서 우리가 각 학생에 대한 정보를 오브젝트로 저장한다고 하자.
+1 2 3  var 학생1 = { name : &amp;#39;Kim&amp;#39;, age : 15 }; var 학생2 = { name : &amp;#39;Park&amp;#39;, age : 15 }; ...   이런 식으로 하드코딩하는 것보다 비슷한 오브젝트이니 복사해주는 것이 좋다. 하지만 오브젝트는 reference type이라서 단순히 등호(=)를 이용해서 복사하게 되면 문제가 발생한다.
+그래서 우리는 이러한 오브젝트들을 찍어내는 기계를 이용하는데 이것이 바로 constructor이다.'><title>js constructor와 prototype</title>
+
+<link rel='canonical' href='https://limecats0331.github.io/p/js-constructor%EC%99%80-prototype/'>
+
+<link rel="stylesheet" href="/scss/style.min.4c6674dd77a6b8df901ddbc754515dfe323079b9a4bd2ad152215655a1cb088c.css"><meta property='og:title' content='js constructor와 prototype'>
+<meta property='og:description' content='constructor 쉽게 설명하자면 object를 만들어주는 기계라고 생각하면 된다. 예를 들어서 우리가 각 학생에 대한 정보를 오브젝트로 저장한다고 하자.
+1 2 3  var 학생1 = { name : &amp;#39;Kim&amp;#39;, age : 15 }; var 학생2 = { name : &amp;#39;Park&amp;#39;, age : 15 }; ...   이런 식으로 하드코딩하는 것보다 비슷한 오브젝트이니 복사해주는 것이 좋다. 하지만 오브젝트는 reference type이라서 단순히 등호(=)를 이용해서 복사하게 되면 문제가 발생한다.
+그래서 우리는 이러한 오브젝트들을 찍어내는 기계를 이용하는데 이것이 바로 constructor이다.'>
+<meta property='og:url' content='https://limecats0331.github.io/p/js-constructor%EC%99%80-prototype/'>
+<meta property='og:site_name' content='limecats Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='js' /><meta property='article:published_time' content='2022-04-15T17:30:08&#43;09:00'/><meta property='article:modified_time' content='2022-04-15T17:30:08&#43;09:00'/>
+<meta name="twitter:title" content="js constructor와 prototype">
+<meta name="twitter:description" content="constructor 쉽게 설명하자면 object를 만들어주는 기계라고 생각하면 된다. 예를 들어서 우리가 각 학생에 대한 정보를 오브젝트로 저장한다고 하자.
+1 2 3  var 학생1 = { name : &amp;#39;Kim&amp;#39;, age : 15 }; var 학생2 = { name : &amp;#39;Park&amp;#39;, age : 15 }; ...   이런 식으로 하드코딩하는 것보다 비슷한 오브젝트이니 복사해주는 것이 좋다. 하지만 오브젝트는 reference type이라서 단순히 등호(=)를 이용해서 복사하게 되면 문제가 발생한다.
+그래서 우리는 이러한 오브젝트들을 찍어내는 기계를 이용하는데 이것이 바로 constructor이다.">
+    <link rel="shortcut icon" href="favicon_io/favicon-16x16.png" />
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YSQ9JXW8S5"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'G-YSQ9JXW8S5', { 'anonymize_ip': false });
+}
+</script>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="메뉴 여닫기">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">limecats Blog</a></h1>
+            <h2 class="site-description">열심히 개발 공부하는 블로그</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/CaiJimmy/hugo-theme-stack'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>다크 모드</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/study/" >
+                study
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/js-constructor%EC%99%80-prototype/">js constructor와 prototype</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Apr 15, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 분 정도
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="constructor">constructor</h2>
+<p>쉽게 설명하자면 <code>object</code>를 만들어주는 기계라고 생각하면 된다. 예를 들어서 우리가 각 학생에 대한 정보를 오브젝트로 저장한다고 하자.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생1</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;Kim&#39;</span><span class="p">,</span> <span class="nx">age</span> <span class="o">:</span> <span class="mi">15</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;Park&#39;</span><span class="p">,</span> <span class="nx">age</span> <span class="o">:</span> <span class="mi">15</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이런 식으로 하드코딩하는 것보다 비슷한 오브젝트이니 복사해주는 것이 좋다. 하지만 오브젝트는 <code>reference type</code>이라서 단순히 등호(<code>=</code>)를 이용해서 복사하게 되면 문제가 발생한다.</p>
+<p>그래서 우리는 이러한 오브젝트들을 찍어내는 기계를 이용하는데 이것이 바로 <code>constructor</code>이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Kim&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이런 식으로 사용하게 되는데 여기서 <code>this</code>의 의미는 새로 생성되는 오브젝트를 뜻하고 이것을 <code>인스턴스</code>라고 부른다. 위의 <code>기계</code>는 <code>{ name = 'Kim', age = 15 }</code>라는 오브젝트를 생성하게 되는데 생성할 때는 다음과 같이 사용해주면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Kim&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>여기서 오브젝트에 함수도 추가해줄 수 있다. <code>sayhi</code>라는 함수를 통해서 이름이 들어간 인사를 출력해주는 함수를 넣고 싶다면 다음과 같이 해주면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Kim&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">sayHi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;안녕하세요&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; 입니다&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">학생2</span><span class="p">.</span><span class="nx">sayHi</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 만들어진 오브젝트에는 한가지 단점이 있는데 모두 같은 이름과 나이를 가진 오브젝트가 생성된다는 것이다. 각각의 속성들을 다르게 해주고 싶다면 <code>파라미터</code>를 이용하면 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(</span><span class="nx">이름</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">이름</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">sayHi</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;안녕하세요&#39;</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; 입니다&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">(</span><span class="s1">&#39;Park&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">(</span><span class="s1">&#39;Kim&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 <code>constructor</code>가 가진 속성을 그대로 물려받은 <code>오브젝트</code>를 생성하는 것을 <code>상속(inheritance)</code>이라고 한다.</p>
+<h2 id="prototype">prototype</h2>
+<p>근데 js에는 <code>constructor</code>말고도 상속 기능을 구현하는 방법이 있다. 바로 <code>prototype</code>이다. 우리가 만든 <code>constructor</code>들은 <code>prototype</code>을 자동으로 생성한다. 다음과 같은 방법으로 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Kim&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">기계</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>여기서 <code>prototype</code>는 비유하자면 일종의 부모의 유전자 역활을 한다고 보면 된다. 때문에 <code>기계.prototype</code>에 무언가 변수나 함수가 들어있다면 <code>기계</code>로부터 만들어진 자식들도 물려받아서 사용이 가능하다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Kim&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">기계</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">gender</span> <span class="o">=</span> <span class="s1">&#39;남&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">학생1</span><span class="p">.</span><span class="nx">gender</span><span class="p">);</span> <span class="c1">//&#39;남&#39;이 출력된다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 <code>prototype</code>을 이용해서 <code>gender</code>를 추가해주면 <code>기계</code>로 만든 모든 오브젝트에서 <code>gender</code>라는 속성을 사용할 수 있다. 이런 값들을 여러개 부여할 수도 있고 심지어 함수도 집어넣을 수 있다.</p>
+<p>하지만 이렇게 추가된 데이터는 자식이 직접 가지고 있는 것이 아니고 부모만 가지고 있다.</p>
+<h3 id="작동-원리">작동 원리</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Kim&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">기계</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">gender</span> <span class="o">=</span> <span class="s1">&#39;남&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">학생1</span><span class="p">.</span><span class="nx">gender</span><span class="p">);</span> <span class="c1">//&#39;남&#39;이 출력된다.
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>해당 코드에서 오브젝트에서 값을 출력할 때 다음과 같은 순서로 물어본다.</p>
+<ol>
+<li>학생1에 <code>gender</code>라는 값이 있는가?</li>
+<li>그럼 부모 <code>prototype</code>에 값이 있는가?</li>
+<li>그럼 부모의 부모 <code>prototype</code>에 있는가?</li>
+<li>그럼 부모의 부모의 &hellip; <code>prototype</code>에 있는가?</li>
+</ol>
+<p>따라서 학생1이라는 오브젝트에는 <code>gender</code>라는 값은 없지만 부모의 <code>prototype</code>에는 존재하기 때문에 출력할 수 있는 것이다.</p>
+<h3 id="내장-함수">내장 함수</h3>
+<p>우리가 <code>array</code>의 <code>toString()</code> 같은 내장함수를 사용할 수 있는 것도 같은 원리이다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="p">);</span> <span class="c1">//가능
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>이런 식으로 <code>arr.toString()</code> 이렇게 붙일 수 있는 이유는 <code>array</code>의 부모 <code>prototype</code>이 <code>toString()</code>이라는 함수를 가지고 있기 때문이다.</p>
+<p>우리가 array나 object 자료형을 만들 때는 실제로 이런 식으로 만들어진다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>우리는 위의 방식으로 만들지만 사실은 아래와 같은 방식으로 만들어진다. 때문에 <code>arr</code>의 타입을 출력해보면 오브젝트로 나온다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">typeof</span> <span class="nx">arr</span><span class="p">);</span> <span class="c1">//object
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>진짜로 <code>toString()</code>이라는 함수가 <code>Array</code>의 <code>prototype</code>에 있는지는 직접 출력해보면 확인할 수 있다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/js_prototype/Array_Prototype.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="프로토타입"
+	
+	
+></p>
+<p>또한 MDN에 적혀진 문구도 이해할 수 있다.</p>
+<p><img src="/img/js_prototype/toString_mdn.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="MDN"
+	
+	
+></p>
+<p><code>Object</code>라는 <code>Constructor</code>의 유전자(<code>prototype</code>)에 있는 <code>toString()</code> 함수라는 뜻이다.</p>
+<h3 id="특징">특징</h3>
+<ol>
+<li><code>prototype</code>은 <code>constructor</code> 함수에만 몰래 생성된다.</li>
+</ol>
+<p>일반 <code>object</code>, <code>array</code> 이런거 만들어도 거기엔 <code>prototype</code>이 존재하지 않는다. 만약 일반 <code>object</code>를 상속하고 싶다면 <code>constructor</code>를 사용하거나 <code>Object.create()</code>를 사용하거나 <code>class</code>를 사용하는 셋중 하나를 사용하면 된다.</p>
+<ol start="2">
+<li>내 부모의 <code>prototype</code>을 찾고 싶으면 <code>__proto__</code>를 출력해보면 된다.</li>
+</ol>
+<p>부모로부터 생성된 자식 <code>object</code>들은 <code>__proto__</code>라는 속성이 있다. 이것은 부모의 <code>prototype</code>을 나타낸다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Kim&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">학생1</span><span class="p">.</span><span class="nx">__proto__</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">기계</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>따라서 이렇게 출력해보면 둘이 같은 것을 알 수 있다.</p>
+<ol start="3">
+<li><code>__proto__</code>를 직접 등록하면 object끼리 상속기능을 구현할 수 있다.</li>
+</ol>
+<p><code>__proto__</code>는 부모의 <code>prototype</code>을 의미한다고 했는데 이를 직접 설정해주면 어떻게 될까? 그럼 직접 설정해준 것이 부모가 된다.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">부모</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span> <span class="o">:</span> <span class="s1">&#39;Kim&#39;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">자식</span> <span class="o">=</span> <span class="p">{};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">자식</span><span class="p">.</span><span class="nx">__proto__</span> <span class="o">=</span> <span class="nx">부모</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">자식</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>이렇게 되면 자식의 <code>prototype</code>은 <code>{ name : 'Kim' }</code>이라는 오브젝트가 된다.</p>
+<ol start="4">
+<li>실은 <code>console</code>에서 <code>prototype</code> 정보들은 항상 출력된다.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-js" data-lang="js"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">기계</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s1">&#39;Kim&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">학생1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">기계</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">학생1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/img/js_prototype/console.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="console_prototype"
+	
+	
+></p>
+<p>여기서 더 나가아서 부모의 <code>prototype</code>도 확인할 수 있다. 이렇게 확인하면 결국 <code>Object()</code>라는 <code>constructor</code>가 나오게 된다. 그래서 자바스크립트는 모든게 다 <code>Object</code>라고 말하는 것이다!</p>
+<h2 id="constructor-vs-prototype">constructor vs prototype</h2>
+<p>그래서 어느 상황에서 <code>constructor</code>를 사용하고 어느 상황에서 <code>prototype</code>를 사용하면 되는 걸까?</p>
+<p>자식들이 값을 직접 소유하게 하고 싶으면 <code>constructor</code>를 사용해서 상속시키면 되고 부모만 가지고 참조해서 쓰고 싶으면 <code>prototype</code>를 사용하면 된다. 그래서 보통 함수같은 것들을 <code>prototype</code>로 많이 사용한다.</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/js/">js</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-contents--wrapper">
+    <h2 class="section-title">관련 글</h2>
+    <div class="related-contents">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%EC%99%9C-jwt%EB%A5%BC-%EA%B3%A8%EB%9E%90%EC%9D%84%EA%B9%8C/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">왜 JWT를 골랐을까?</h2>
+        </div>
+    </a>
+</article>
+            
+                
+<article class="">
+    <a href="/p/vue-express-%EC%97%B0%EB%8F%99%ED%95%98%EA%B8%B0-2022/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">vue-express 연동하기 2022</h2>
+        </div>
+    </a>
+</article>
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js"
+        repo="limecats0331/limecats0331.github.io"
+        issue-term="pathname"
+        theme="gruvbox-dark"
+        crossorigin="anonymous"
+        async>
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2022 limecats Blog
+    </section>
+    
+    <section class="powerby">
+        <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a>로 만듦 <br />
+        <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>의 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.10.0">Stack</a></b> 테마 사용 중
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">목차</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#constructor">constructor</a></li>
+    <li><a href="#prototype">prototype</a>
+      <ol>
+        <li><a href="#작동-원리">작동 원리</a></li>
+        <li><a href="#내장-함수">내장 함수</a></li>
+        <li><a href="#특징">특징</a></li>
+      </ol>
+    </li>
+    <li><a href="#constructor-vs-prototype">constructor vs prototype</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
